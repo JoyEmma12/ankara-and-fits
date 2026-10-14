@@ -1,0 +1,15 @@
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/utilities';
+@source "./**/*.{js,ts,jsx,tsx}";
+
+@theme inline {
+  --color-ring: var(--ring); --color-input: var(--input); --color-border: var(--border); --color-destructive: var(--destructive); --color-accent-foreground: var(--accent-foreground); --color-accent: var(--accent); --color-muted-foreground: var(--muted-foreground); --color-muted: var(--muted); --color-secondary-foreground: var(--secondary-foreground); --color-secondary: var(--secondary); --color-primary-foreground: var(--primary-foreground); --color-primary: var(--primary); --color-card-foreground: var(--card-foreground); --color-card: var(--card); --color-foreground: var(--foreground); --color-background: var(--background); --radius-lg: var(--radius);
+}
+:root { --background: #fbf9fc; --foreground: #27212d; --card: #ffffff; --primary: #765080; --primary-foreground: #ffffff; --secondary: #f1e8f4; --secondary-foreground: #5a3b62; --muted-foreground: #756b79; --border: #e7dce9; --input: #e7dce9; --ring: #a77eb0; --radius: .75rem; }
+@layer base { * { @apply border-border; } body { @apply bg-background text-foreground; } }
+body { font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; }
+.font-serif { font-family: Georgia, 'Times New Roman', serif; }
+.bg-print-lilac { background-color: #c9a8cf; background-image: radial-gradient(circle at 25% 25%, #f3d9f4 0 8%, transparent 9%), radial-gradient(circle at 75% 65%, #765080 0 10%, transparent 11%), radial-gradient(circle at 65% 15%, #e8cce9 0 7%, transparent 8%), linear-gradient(135deg, #c69dcb, #8b5a92); background-size: 88px 88px, 110px 110px, 120px 120px, 100% 100%; }
+.bg-print-indigo { background-color: #1f355f; background-image: linear-gradient(45deg, transparent 42%, #d3a8ca 43% 57%, transparent 58%), linear-gradient(-45deg, transparent 42%, #7091b2 43% 57%, transparent 58%); background-size: 74px 74px; }
+.bg-print-terra { background-color: #bb604c; background-image: radial-gradient(ellipse at 30% 30%, #f0ba7b 0 14%, transparent 15%), radial-gradient(ellipse at 75% 70%, #743d5a 0 15%, transparent 16%), linear-gradient(45deg, transparent 45%, #e68d61 46% 54%, transparent 55%); background-size: 115px 115px, 130px 130px, 100px 100px; }
+.bg-print-garden { background-color: #d9a0b1; background-image: radial-gradient(circle at 20% 65%, #61754d 0 13%, transparent 14%), radial-gradient(circle at 70% 25%, #f2dc8a 0 12%, transparent 13%), linear-gradient(120deg, transparent 43%, #7f496b 44% 52%, transparent 53%); background-size: 100px 100px, 130px 130px, 90px 90px; }

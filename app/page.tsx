@@ -1,0 +1,92 @@
+'use client'
+
+import { useState } from 'react'
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ChevronDown,
+  Heart,
+  Menu,
+  Minus,
+  Plus,
+  Ruler,
+  Scissors,
+  ShoppingBag,
+  Sparkles,
+  Upload,
+  X,
+} from 'lucide-react'
+
+const prints = [
+  { name: 'Lilac Bloom', category: 'Botanical', price: 6800, image: 'bg-print-lilac', description: 'Soft lavender florals with a little joy.' },
+  { name: 'Indigo Rhythm', category: 'Geometric', price: 7200, image: 'bg-print-indigo', description: 'Bold lines for your main-character moments.' },
+  { name: 'Terracotta Dance', category: 'Abstract', price: 6500, image: 'bg-print-terra', description: 'Warm, earthy colour that photographs beautifully.' },
+  { name: 'Garden Party', category: 'Floral', price: 7600, image: 'bg-print-garden', description: 'A cheerful garden for celebratory days.' },
+]
+
+export default function Page() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [authOpen, setAuthOpen] = useState(false)
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('signup')
+  const [yard, setYard] = useState(4)
+  const [selected, setSelected] = useState(prints[0])
+  const [saved, setSaved] = useState<string[]>([])
+  const [service, setService] = useState('I have my measurements')
+
+  const naira = (amount: number) => `₦${amount.toLocaleString('en-NG')}`
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setMenuOpen(false)
+  }
+
+  return (
+    <main className="min-h-screen bg-[#fbf9fc] text-[#27212d]">
+      <header className="sticky top-0 z-40 border-b border-[#e9e0ed] bg-[#fbf9fc]/95 backdrop-blur">
+        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 lg:px-10">
+          <button onClick={() => scrollTo('home')} className="flex items-center gap-3 text-left" aria-label="Ankara and Fits by Deko home">
+            <span className="flex size-10 items-center justify-center rounded-full bg-[#745481] text-lg font-semibold text-white">A</span>
+            <span className="leading-tight"><strong className="block font-serif text-lg">Ankara & Fits</strong><small className="text-[10px] uppercase tracking-[0.18em] text-[#8d7893]">by Deko</small></span>
+          </button>
+          <nav className="hidden items-center gap-8 text-sm font-medium text-[#63566a] md:flex" aria-label="Main navigation">
+            <button onClick={() => scrollTo('home')} className="transition-colors hover:text-[#745481]">Home</button>
+            <button onClick={() => scrollTo('prints')} className="transition-colors hover:text-[#745481]">Shop prints</button>
+            <button onClick={() => scrollTo('tailoring')} className="transition-colors hover:text-[#745481]">Tailoring</button>
+            <button onClick={() => scrollTo('story')} className="transition-colors hover:text-[#745481]">Our story</button>
+          </nav>
+          <div className="flex items-center gap-2">
+            <button onClick={() => { setAuthMode('login'); setAuthOpen(true) }} className="hidden rounded-full px-4 py-2.5 text-sm font-semibold text-[#745481] hover:bg-[#f1eaf4] sm:block">Sign in</button>
+            <button onClick={() => scrollTo('prints')} className="flex items-center gap-2 rounded-full bg-[#745481] px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-[#745481]/20 hover:bg-[#603d6d]">Shop now <ArrowRight data-icon="inline-end" /></button>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full p-2 md:hidden" aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</button>
+          </div>
+        </div>
+        {menuOpen && <div className="flex flex-col gap-4 border-t border-[#e9e0ed] bg-white px-5 py-5 text-sm font-medium md:hidden"><button onClick={() => scrollTo('home')} className="text-left">Home</button><button onClick={() => scrollTo('prints')} className="text-left">Shop prints</button><button onClick={() => scrollTo('tailoring')} className="text-left">Tailoring</button><button onClick={() => scrollTo('story')} className="text-left">Our story</button></div>}
+      </header>
+
+      <section id="home" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-12 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-20">
+        <div className="max-w-xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#dccbe2] bg-[#f6eff8] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#745481]"><Sparkles data-icon="inline-start" /> Made for your becoming</div>
+          <h1 className="font-serif text-[clamp(3.3rem,7vw,6.2rem)] leading-[0.95] tracking-[-0.04em] text-[#2f2336]">Wear your story <em className="font-serif text-[#9d77a8]">loudly.</em></h1>
+          <p className="mt-7 max-w-lg text-lg leading-8 text-[#716676]">Beautiful Ankara, chosen with feeling and made to fit the life you are living. Find your print, then let us help you bring the whole look together.</p>
+          <div className="mt-9 flex flex-wrap gap-3"><button onClick={() => scrollTo('prints')} className="rounded-full bg-[#745481] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#745481]/20 hover:bg-[#603d6d]">Explore the collection <ArrowRight className="ml-2 inline" /></button><button onClick={() => scrollTo('tailoring')} className="rounded-full border border-[#d9c9df] bg-white px-6 py-3.5 font-semibold text-[#745481] hover:bg-[#f6eff8]">Need a tailor?</button></div>
+          <div className="mt-12 flex items-center gap-8 border-t border-[#e9e0ed] pt-6 text-sm text-[#716676]"><span><strong className="block text-xl text-[#2f2336]">1,200+</strong> happy clients</span><span><strong className="block text-xl text-[#2f2336]">4.9/5</strong> customer love</span><span><strong className="block text-xl text-[#2f2336]">Lagos</strong> made with care</span></div>
+        </div>
+        <div className="relative mx-auto w-full max-w-[540px] lg:ml-auto"><div className="absolute -right-4 -top-5 hidden rounded-2xl bg-white p-3 shadow-xl shadow-[#745481]/10 sm:block"><div className="flex items-center gap-2 text-xs font-semibold text-[#745481]"><Heart className="fill-[#d79cb8] text-[#d79cb8]" /> Loved by Deko girls</div></div><div className="overflow-hidden rounded-[2rem] bg-[#e4d3e8] p-3 shadow-2xl shadow-[#745481]/10"><img src="/ankara-fabric.png" alt="Woman wearing a lavender Ankara dress beside folded fabrics" className="aspect-[0.9] w-full rounded-[1.5rem] object-cover" /></div><div className="absolute -bottom-5 -left-4 rounded-2xl border border-[#e9e0ed] bg-white px-4 py-3 shadow-lg"><p className="text-[10px] uppercase tracking-[0.16em] text-[#9d77a8]">The Deko promise</p><p className="mt-1 font-serif text-base">Good fabric. Good fit. Good feeling.</p></div></div>
+      </section>
+
+      <section id="prints" className="bg-[#f3edf5] px-5 py-20 lg:px-10"><div className="mx-auto max-w-7xl"><div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9d77a8]">The collection</p><h2 className="mt-2 font-serif text-4xl text-[#2f2336] sm:text-5xl">Prints with a point of view.</h2></div><button className="flex items-center gap-2 self-start rounded-full border border-[#d9c9df] bg-white px-4 py-2.5 text-sm font-semibold text-[#745481]">View all prints <ArrowRight data-icon="inline-end" /></button></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{prints.map((print) => <article key={print.name} className="group"><div className={`relative aspect-[0.86] overflow-hidden rounded-2xl ${print.image}`}><button onClick={() => setSaved(saved.includes(print.name) ? saved.filter(x => x !== print.name) : [...saved, print.name])} className="absolute right-3 top-3 rounded-full bg-white/85 p-2.5 text-[#745481] backdrop-blur" aria-label={`Save ${print.name}`}> <Heart className={saved.includes(print.name) ? 'fill-[#d79cb8] text-[#d79cb8]' : ''} /></button><button onClick={() => { setSelected(print); scrollTo('order') }} className="absolute bottom-3 left-3 right-3 translate-y-14 rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#745481] opacity-0 shadow-lg transition-all group-hover:translate-y-0 group-hover:opacity-100">Choose this print <ArrowRight className="ml-1 inline" /></button></div><div className="pt-4"><div className="flex items-start justify-between gap-2"><div><h3 className="font-serif text-xl">{print.name}</h3><p className="mt-1 text-sm text-[#827487]">{print.description}</p></div><p className="whitespace-nowrap font-semibold text-[#745481]">{naira(print.price)}<span className="block text-right text-xs font-normal text-[#927f98]">per yard</span></p></div></div></article>)}</div></div></section>
+
+      <section id="order" className="mx-auto grid max-w-7xl gap-10 px-5 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-10"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9d77a8]">Make it yours</p><h2 className="mt-2 font-serif text-4xl text-[#2f2336] sm:text-5xl">Your fabric,<br /><em className="text-[#9d77a8]">your measure.</em></h2><p className="mt-5 max-w-md leading-7 text-[#716676]">Every order starts with a conversation. Tell us how many yards you need, and we will prepare it beautifully for you.</p><div className="mt-8 overflow-hidden rounded-2xl"><img src="/ankara-prints.png" alt="Folded Ankara prints in indigo, terracotta, and lavender" className="aspect-[1.45] w-full object-cover" /></div></div><div className="rounded-3xl border border-[#e8ddeb] bg-white p-6 shadow-xl shadow-[#745481]/5 sm:p-8"><div className="flex items-center justify-between border-b border-[#eee5f0] pb-5"><div><p className="text-xs uppercase tracking-[0.15em] text-[#9d77a8]">Selected print</p><h3 className="mt-1 font-serif text-2xl">{selected.name}</h3></div><p className="font-semibold text-[#745481]">{naira(selected.price)} / yd</p></div><div className="py-7"><label className="text-sm font-semibold">How many yards would you like?</label><div className="mt-4 flex items-center justify-between rounded-2xl bg-[#f6eff8] p-2"><button onClick={() => setYard(Math.max(1, yard - 1))} className="flex size-11 items-center justify-center rounded-xl bg-white text-[#745481] shadow-sm" aria-label="Decrease yards"><Minus /></button><span className="font-serif text-3xl">{yard} <small className="font-sans text-sm text-[#827487]">yards</small></span><button onClick={() => setYard(yard + 1)} className="flex size-11 items-center justify-center rounded-xl bg-[#745481] text-white" aria-label="Increase yards"><Plus /></button></div></div><div className="flex items-center justify-between border-t border-[#eee5f0] pt-5"><span className="text-[#716676]">Fabric total</span><strong className="font-serif text-2xl">{naira(selected.price * yard)}</strong></div><button onClick={() => setAuthOpen(true)} className="mt-6 w-full rounded-full bg-[#745481] py-3.5 font-semibold text-white hover:bg-[#603d6d]">Continue to checkout <ArrowRight className="ml-2 inline" /></button><p className="mt-3 text-center text-xs text-[#927f98]">You can review everything before payment.</p></div></section>
+
+      <section id="tailoring" className="bg-[#2f2336] px-5 py-20 text-white lg:px-10"><div className="mx-auto max-w-7xl"><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#d6bce0]">The full Deko experience</p><h2 className="mt-3 font-serif text-4xl leading-tight sm:text-5xl">Have a look in mind?<br /><em className="text-[#d6bce0]">Let&apos;s make it real.</em></h2><p className="mt-5 max-w-md leading-7 text-[#c9b8ce]">Our trusted tailors can bring your inspiration to life, from a simple two-piece to the outfit you have been saving on Pinterest.</p><div className="mt-8 flex flex-col gap-4 text-sm text-[#dfd3e2]"><span className="flex items-center gap-3"><span className="flex size-8 items-center justify-center rounded-full bg-[#745481]"><Upload /></span> Upload a reference style</span><span className="flex items-center gap-3"><span className="flex size-8 items-center justify-center rounded-full bg-[#745481]"><Ruler /></span> Send measurements or visit us</span><span className="flex items-center gap-3"><span className="flex size-8 items-center justify-center rounded-full bg-[#745481]"><CalendarDays /></span> Choose your delivery date</span></div></div><div className="rounded-3xl bg-white p-6 text-[#2f2336] sm:p-8"><div className="flex items-center gap-3 border-b border-[#eee5f0] pb-5"><span className="flex size-11 items-center justify-center rounded-full bg-[#f3e8f6] text-[#745481]"><Scissors /></span><div><h3 className="font-serif text-2xl">Tell us about your look</h3><p className="text-sm text-[#827487]">We will reply with a clear quote.</p></div></div><div className="mt-6 grid gap-5 sm:grid-cols-2"><label className="text-sm font-semibold">Your name<input className="mt-2 w-full rounded-xl border border-[#ddd0e1] bg-[#fcfafc] px-4 py-3 font-normal outline-none focus:border-[#745481]" placeholder="e.g. Adaeze Okoro" /></label><label className="text-sm font-semibold">WhatsApp number<input className="mt-2 w-full rounded-xl border border-[#ddd0e1] bg-[#fcfafc] px-4 py-3 font-normal outline-none focus:border-[#745481]" placeholder="0800 000 0000" /></label></div><div className="mt-5"><span className="text-sm font-semibold">How will you share your measurements?</span><div className="mt-2 grid gap-2 sm:grid-cols-2">{['I have my measurements', 'I want to visit the studio'].map(option => <button key={option} onClick={() => setService(option)} className={`rounded-xl border px-4 py-3 text-left text-sm ${service === option ? 'border-[#745481] bg-[#f6eff8] text-[#745481]' : 'border-[#ddd0e1]'}`}>{service === option && <Check className="mr-2 inline" />}{option}</button>)}</div></div><div className="mt-5 grid gap-5 sm:grid-cols-2"><label className="text-sm font-semibold">Preferred delivery date<input type="date" className="mt-2 w-full rounded-xl border border-[#ddd0e1] bg-[#fcfafc] px-4 py-3 font-normal outline-none" /></label><label className="text-sm font-semibold">Upload your style<button className="mt-2 flex w-full items-center gap-2 rounded-xl border border-dashed border-[#cdb8d3] bg-[#fcfafc] px-4 py-3 text-left text-sm font-normal text-[#827487]"><Upload /> Add image</button></label></div><button onClick={() => setAuthOpen(true)} className="mt-6 w-full rounded-full bg-[#745481] py-3.5 font-semibold text-white hover:bg-[#603d6d]">Request a tailoring quote <ArrowRight className="ml-2 inline" /></button></div></div></div></section>
+
+      <section id="story" className="mx-auto max-w-7xl px-5 py-20 text-center lg:px-10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9d77a8]">Why Ankara & Fits</p><h2 className="mx-auto mt-3 max-w-2xl font-serif text-4xl leading-tight text-[#2f2336] sm:text-5xl">Clothes should feel like a little bit of <em className="text-[#9d77a8]">home.</em></h2><p className="mx-auto mt-5 max-w-2xl leading-7 text-[#716676]">We started Ankara & Fits by Deko because finding beautiful fabric should feel less like a transaction and more like finding a friend who gets your style. Each print is sourced with care, and each order is handled by a real person.</p><div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-3"><span className="rounded-full bg-[#f3edf5] px-5 py-3 text-sm">Curated in Lagos</span><span className="rounded-full bg-[#f3edf5] px-5 py-3 text-sm">Tailors we trust</span><span className="rounded-full bg-[#f3edf5] px-5 py-3 text-sm">Delivery across Nigeria</span></div></section>
+
+      <footer className="border-t border-[#e9e0ed] bg-white px-5 py-8 lg:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-[#827487] sm:flex-row"><p>© 2025 Ankara & Fits by Deko. Made with care.</p><p>hello@ankaraandfits.ng · Lagos, Nigeria</p></div></footer>
+
+      {authOpen && <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2f2336]/50 p-5 backdrop-blur-sm"><div className="relative w-full max-w-md rounded-3xl bg-white p-7 shadow-2xl sm:p-9"><button onClick={() => setAuthOpen(false)} className="absolute right-5 top-5 rounded-full p-2 text-[#827487] hover:bg-[#f3edf5]" aria-label="Close"><X /></button><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9d77a8]">Welcome in</p><h2 className="mt-2 font-serif text-3xl">{authMode === 'signup' ? 'Create your Deko account' : 'Good to see you again'}</h2><p className="mt-2 text-sm leading-6 text-[#827487]">{authMode === 'signup' ? 'Save your favourite prints and keep your orders in one lovely place.' : 'Sign in to see your saved prints and order updates.'}</p><div className="mt-6 flex rounded-xl bg-[#f6eff8] p-1"><button onClick={() => setAuthMode('signup')} className={`flex-1 rounded-lg py-2 text-sm font-semibold ${authMode === 'signup' ? 'bg-white text-[#745481] shadow-sm' : 'text-[#827487]'}`}>Create account</button><button onClick={() => setAuthMode('login')} className={`flex-1 rounded-lg py-2 text-sm font-semibold ${authMode === 'login' ? 'bg-white text-[#745481] shadow-sm' : 'text-[#827487]'}`}>Sign in</button></div><div className="mt-6 flex flex-col gap-4">{authMode === 'signup' && <label className="text-sm font-semibold">Full name<input className="mt-2 w-full rounded-xl border border-[#ddd0e1] px-4 py-3 font-normal outline-none focus:border-[#745481]" placeholder="Your name" /></label>}<label className="text-sm font-semibold">Email address<input type="email" className="mt-2 w-full rounded-xl border border-[#ddd0e1] px-4 py-3 font-normal outline-none focus:border-[#745481]" placeholder="you@example.com" /></label><label className="text-sm font-semibold">Password<input type="password" className="mt-2 w-full rounded-xl border border-[#ddd0e1] px-4 py-3 font-normal outline-none focus:border-[#745481]" placeholder="••••••••" /></label></div><button onClick={() => setAuthOpen(false)} className="mt-6 w-full rounded-full bg-[#745481] py-3.5 font-semibold text-white">{authMode === 'signup' ? 'Create my account' : 'Sign in'} <ArrowRight className="ml-2 inline" /></button><p className="mt-4 text-center text-xs text-[#927f98]">By continuing, you agree to our terms and privacy policy.</p></div></div>}
+    </main>
+  )
+}
+
