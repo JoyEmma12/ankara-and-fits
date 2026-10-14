@@ -43,7 +43,32 @@ body {
 }
 img { display: block; max-width: 100%; }
 button, input, textarea, select { font: inherit; }
+button, a, input, textarea, select { transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease; }
+button:active { transform: scale(.98); }
+.group > div:first-child { transition: transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease; }
+.group:hover > div:first-child { transform: translateY(-5px); box-shadow: 0 18px 34px rgba(116, 84, 129, .16); }
+
 .font-serif { font-family: Georgia, "Times New Roman", serif; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes reveal-scale {
+  from { opacity: 0; transform: scale(.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.motion-fade-up { animation: fade-up .7s cubic-bezier(.22, 1, .36, 1) both; }
+.motion-float { animation: soft-float 5s ease-in-out infinite; }
+.motion-reveal { animation: reveal-scale .75s cubic-bezier(.22, 1, .36, 1) both; }
+.motion-delay-1 { animation-delay: .1s; }
+.motion-delay-2 { animation-delay: .2s; }
+.motion-delay-3 { animation-delay: .3s; }
 
 .bg-print-lilac { background-color: #c9a8cf; background-image: radial-gradient(circle at 25% 25%, #f3d9f4 0 8%, transparent 9%), radial-gradient(circle at 75% 65%, #765080 0 10%, transparent 11%), radial-gradient(circle at 65% 15%, #e8cce9 0 7%, transparent 8%), linear-gradient(135deg, #c69dcb, #8b5a92); background-size: 88px 88px, 110px 110px, 120px 120px, 100% 100%; }
 .bg-print-indigo { background-color: #1f355f; background-image: linear-gradient(45deg, transparent 42%, #d3a8ca 43% 57%, transparent 58%), linear-gradient(-45deg, transparent 42%, #7091b2 43% 57%, transparent 58%); background-size: 74px 74px; }
