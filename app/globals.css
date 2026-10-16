@@ -41,6 +41,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+main, section, header, footer { min-width: 0; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 639px) {
+  h1 { text-wrap: balance; }
+  h2, h3 { text-wrap: balance; }
+  input, textarea, select { font-size: 16px; }
+}
 img { display: block; max-width: 100%; }
 button, input, textarea, select { font: inherit; }
 button, a, input, textarea, select { transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease; }

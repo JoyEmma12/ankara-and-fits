@@ -1,5 +1,6 @@
 'use client'
 
+import { SignInButton, SignUpButton, UserButton, Show } from '@clerk/nextjs'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -56,12 +57,12 @@ export default function Page() {
             <button onClick={() => scrollTo('story')} className="transition-colors hover:text-[#745481]">Our story</button>
           </nav>
           <div className="flex items-center gap-2">
-            <button onClick={() => { setAuthMode('login'); setAuthOpen(true) }} className="hidden rounded-full px-4 py-2.5 text-sm font-semibold text-[#745481] hover:bg-[#f1eaf4] sm:block">Sign in</button>
+            <Show when="signed-out"><SignInButton mode="modal" fallbackRedirectUrl="#prints"><button className="hidden rounded-full px-4 py-2.5 text-sm font-semibold text-[#745481] hover:bg-[#f1eaf4] sm:block">Sign in</button></SignInButton><SignUpButton mode="modal" fallbackRedirectUrl="#prints"><button className="hidden rounded-full border border-[#d9c9df] px-4 py-2.5 text-sm font-semibold text-[#745481] hover:bg-[#f1eaf4] lg:block">Join Deko</button></SignUpButton></Show><Show when="signed-in"><UserButton afterSignOutUrl="/" /></Show>
             <button onClick={() => scrollTo('prints')} className="flex items-center gap-2 rounded-full bg-[#745481] px-3 py-2.5 text-xs font-semibold text-white shadow-sm shadow-[#745481]/20 hover:bg-[#603d6d] sm:px-4 sm:text-sm">Shop now <ArrowRight data-icon="inline-end" /></button>
             <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full p-2 md:hidden" aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</button>
           </div>
         </div>
-        {menuOpen && <div className="flex flex-col gap-4 border-t border-[#e9e0ed] bg-white px-5 py-5 text-sm font-medium md:hidden"><button onClick={() => scrollTo('home')} className="text-left">Home</button><button onClick={() => scrollTo('prints')} className="text-left">Shop prints</button><button onClick={() => scrollTo('tailoring')} className="text-left">Tailoring</button><button onClick={() => scrollTo('story')} className="text-left">Our story</button></div>}
+        {menuOpen && <div className="flex flex-col gap-4 border-t border-[#e9e0ed] bg-white px-5 py-5 text-sm font-medium md:hidden"><button onClick={() => scrollTo('home')} className="text-left">Home</button><button onClick={() => scrollTo('prints')} className="text-left">Shop prints</button><button onClick={() => scrollTo('tailoring')} className="text-left">Tailoring</button><button onClick={() => scrollTo('story')} className="text-left">Our story</button><Show when="signed-out"><SignInButton mode="modal" fallbackRedirectUrl="#prints"><button className="rounded-full bg-[#f3edf5] px-4 py-3 text-left font-semibold text-[#745481]">Sign in with Google</button></SignInButton></Show></div>}
       </header>
 
       <section id="home" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-12 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-20">
